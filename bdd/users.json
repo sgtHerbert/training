@@ -1,0 +1,18 @@
+[
+    {
+        "name" : "toto",
+        "mdp"  : "toto"
+    },
+    {
+        "name" : "tata",
+        "mdp"  : "tata"
+    },
+    {
+        "name" : "titi",
+        "mdp"  : "titi"
+    },
+    {
+        "name" : "tutu",
+        "mdp"  : "tutu"
+    }
+]

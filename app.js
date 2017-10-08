@@ -9,35 +9,24 @@ var bodyParser   = require('body-parser');
 var index     = require('./routes/index');
 var users     = require('./routes/users');
 var messaging = require('./routes/messaging');
-
-//var app = require('express')();
+var login 	  = require('./routes/login');
 
 var app = express();
 
+//socket.io messaging
 var socketListener = require('http').createServer(app);
 var io = require('socket.io')(socketListener);
-
 socketListener.listen(8080);
+
+var dialogues = ["c'est quoi ton nom ? ", 'chui pas rassuré', 'regarde à gauche ya des dauphins', "moi c'est zambla", "oua t'es balaise"]
 
 io.on('connection', function(client) {  
 	console.log('Client connected...');
 
-	client.on('join', function(data) {
-			console.log(data);
+	client.on('message', function(){
+		io.emit('message', dialogues[Math.floor(Math.random() * dialogues.length)]);
 	})
 });
-
-// io.on('connection', function(socket){
-// 	console.log('socket connectionRecieved');
-// 	socket.emit('test', 'welcome');
-// 	socket.on('message', function(data){
-// 		console.log('i get a message')
-// 		console.log(data);
-// 		socket.emit('message','server Response');
-// 	})
-// })
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -54,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/messaging', messaging);
+app.use('/login', login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
