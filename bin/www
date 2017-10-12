@@ -20,13 +20,6 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-<<<<<<< HEAD
-//create socket
-//var io = require('socket.io')(server)
-//require('../app/sockets/Base')(io)
-
-=======
->>>>>>> origin/Demheal
 
 /**
  * Listen on provided port, on all network interfaces.

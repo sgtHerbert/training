@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-<<<<<<< HEAD
 var bcrypt = require('bcrypt');
 
 /* GET users listing. */
@@ -21,72 +20,48 @@ router.post('/login', function(req, res, next){
     else res.send("user not found");
 });
 
-router.get('/generate',function(req, res, next){
+//generate a set of user with their crypted password
+// router.get('/generate',function(req, res, next){
 
-    var json = [{ "name": "toto", "mdp":"1"}, { "name": "tata", "mdp":"2"}, {"name": "zambla", "mdp":"3"}];
-    json.forEach(function(user){
-        user.mdp = bcrypt.hashSync(user.name, 10);
-    })
+//     var json = [{ "name": "toto", "mdp":"1", , "pseudo" : "toto"}, { "name": "tata", "mdp":"2", "pseudo" : "tata"}, {"name": "zambla", "mdp":"3", "pseudo" : "zambla"}];
+//     json.forEach(function(user){
+//         user.mdp = bcrypt.hashSync(user.name, 10);
+//     })
 
-    require('fs').writeFile('./bdd/users.json', JSON.stringify(json), function(err){
-         if(err) console.log(err);
-         else("usr.json updated");
-    });
+//     require('fs').writeFile('./bdd/users.json', JSON.stringify(json), function(err){
+//          if(err) console.log(err);
+//          else("usr.json updated");
+//     });
 
-    res.send("users generated");
-});
+//     res.send("users generated");
+// });
 
-
-=======
 var fs = require('fs');
 var moment = require('moment');
 
 /* Searching */
-router.get('/search', function(request, response, next) {
-  
-  var ville = request.query.ville;
-  var pays = request.query.pays;
-  var json = JSON.parse(fs.readFileSync("rent.json"));
-  var reponse = [];
 
-  if(ville&&pays){
-    pays=0;
-  }
-  for(i=0;i<json.length;i++){
-    if(json[i].ville==ville){
-      reponse.push(json[i]);
-    }
-    else{
-      if(json[i].pays==pays){
-        reponse.push(json[i]);
-      }
-    }
-  }
-  response.send(reponse);
+var fs = require('fs');
+
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  var jsondata = JSON.stringify(require('../users.json'));
+  res.send(jsondata);
 });
 
-/* Booking */
-router.get('/booking', function(request, response, next) {
+router.get('/update', function(req, res) {
   
-  var idAppart = request.query.id;
-  var newDateDispo = request.query.date;
+    // var userdata = '../users.json';
+    // var userdataObject = require(userdata);
+      var file = require('../bdd/users');
   
-  var file = require('../rent');
-  var json = JSON.parse(fs.readFileSync("rent.json"));
-
-  var dateNow = moment().format("DD-MM-YYYY");
-  if(moment(dateNow).isSameOrAfter(json[idAppart].datedisponibilite,"day")){
-    file[idAppart].datedisponibilite = newDateDispo;
-    response.send(200,"Ok");
-  }
-  else{
-    response.send(200,"Cet appartement est indisponible");
-  }
-
-
-  fs.writeFile('./rent.json', JSON.stringify(file,null,4), 'utf8');
-
-});
-
->>>>>>> origin/Demheal
+      console.log(file[0]);
+      file[0].name = "Ttiti";
+      console.log(JSON.stringify(file));
+      require('fs').writeFile('../bdd/users', JSON.stringify(file), function(err){
+           if(err) console.log(err);
+           else("users.json updated");
+      });
+      res.send(JSON.stringify(file));
+  });
 module.exports = router;

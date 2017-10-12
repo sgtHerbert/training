@@ -10,6 +10,7 @@ var index     = require('./routes/index');
 var users     = require('./routes/users');
 var messaging = require('./routes/messaging');
 var flats     = require('./routes/flats');
+var mail      = require('./routes/mailer');
 
 var app = express();
 
@@ -28,6 +29,9 @@ io.on('connection', function(client) {
 	})
 });
 
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -45,6 +49,7 @@ app.use('/users', users);
 app.use('/messaging', messaging);
 app.use('/users', users);
 app.use('/flats', flats);
+app.use('/mailer', mail);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
