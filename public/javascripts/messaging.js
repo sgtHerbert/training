@@ -10,7 +10,7 @@ socket.on('connect', function(data) {
 socket.on('message', function(data) {
     console.log('return');
     console.log(data);
-    insereMessage('server', data);
+    insereMessage('server(zambla)', data);
 })
 
 //Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
