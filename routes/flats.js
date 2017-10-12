@@ -1,6 +1,7 @@
+var express = require('express');
+var router = express.Router();
 var fs = require('fs');
 var moment = require('moment');
-
 /* Searching */
 router.get('/search', function(request, response, next) {
   
@@ -47,3 +48,4 @@ router.get('/booking', function(request, response, next) {
   fs.writeFile('./bdd/rent.json', JSON.stringify(file,null,4), 'utf8');
 
 });
+module.exports = router;

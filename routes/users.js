@@ -37,7 +37,6 @@ router.post('/login', function(req, res, next){
 // });
 
 var fs = require('fs');
-var moment = require('moment');
 
 /* Searching */
 
