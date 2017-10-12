@@ -32,7 +32,7 @@ router.get('/booking', function(request, response, next) {
   var idAppart = request.query.id;
   var newDateDispo = request.query.date;
   
-  var file = require('./bdd/rent.json');
+  var file = require('../bdd/rent');
   var json = JSON.parse(fs.readFileSync("./bdd/rent.json"));
 
   var dateNow = moment().format("DD-MM-YYYY");

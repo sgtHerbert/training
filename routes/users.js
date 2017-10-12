@@ -44,7 +44,7 @@ var fs = require('fs');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  var jsondata = JSON.stringify(require('../users.json'));
+  var jsondata = JSON.stringify(require('../bdd/users'));
   res.send(jsondata);
 });
 

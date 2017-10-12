@@ -6,11 +6,7 @@ var smtpTransport = require('nodemailer-smtp-transport');
 
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-
-});
-
-router.get('/mail', function(req, res) {
+router.get('/sendmail', function(req, res) {
 
     var transport = nodemailer.createTransport(smtpTransport({
         service: 'gmail',
@@ -34,9 +30,11 @@ router.get('/mail', function(req, res) {
 
     transport.sendMail(mail, function(error, response) {
         if(error){
-            console.log(error);   
+            console.log(error); 
+            res.send("error occured");
         }else{
             console.log('mail ok');
+            res.send("mail send");
         }
     });
     
